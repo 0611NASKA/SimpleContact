@@ -25,7 +25,7 @@ class Admin::InquiriesController < ApplicationController
 
   def destroy
     @inquiry = Inquiry.find(params[:id])
-    @inquiry.update(is_deleted: true)
+    @inquiry.update_column(:is_deleted, true)
     flash[:notice] = "削除処理を実行しました"
     redirect_to admin_path
   end
