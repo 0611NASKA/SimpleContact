@@ -11,6 +11,7 @@ class Public::InquiriesController < ApplicationController
       session[:inquiry_params] = inquiry_params
       render :confirm
     else
+      @genres = Genre.all
       render :new
     end
   end
@@ -21,6 +22,7 @@ class Public::InquiriesController < ApplicationController
       session.delete(:inquiry_params)
       redirect_to inquiries_complete_path
     else
+      @genres = Genre.all
       render :new
     end
   end
@@ -32,6 +34,6 @@ class Public::InquiriesController < ApplicationController
   private
 
   def inquiry_params
-    params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :telephone_number, :body, :is_deleted)
+    params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :email_confirmation, :telephone_number, :body, :is_deleted)
   end
 end

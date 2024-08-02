@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    attributes:
+      admin:
+        email: メールアドレス
+        number: 管理者番号
+        password: パスワード
+        login: メールアドレスまたは管理者番号
+      inquiry:
+        genre: お問い合わせ内容
+        company: 会社名
+        name: お名前
+        name_kana: ふりがな
+        email: メールアドレス
+        email_confirmation: メールアドレス（確認）
+        telephone_number: 電話番号
+        body: お問い合わせ本文
+        is_deleted: 削除フラグ
+        created_at: 登録日時
+        updated_at: 更新日時
+      genre:
+        name: お問い合わせ内容

@@ -4,6 +4,10 @@
       <h2 class="border-bottom">お問い合わせ詳細</h2>
       <table class="table table-striped table-bordered table-hover table-sm">
         <tr>
+          <th>お問い合わせ日時</th>
+          <td><%= @inquiry.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+        </tr>
+        <tr>
           <th>お問い合わせの内容</th>
           <td><%= @inquiry.genre.name %></td>
         </tr>
@@ -40,6 +44,10 @@
               削除していない
             <% end %>
           </td>
+        </tr>
+        <tr>
+          <th>お問い合わせ更新日時</th>
+          <td><%= @inquiry.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
         </tr>
       </table>
       <div class="text-left">

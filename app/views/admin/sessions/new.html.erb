@@ -1,4 +1,4 @@
-<h2>Log in</h2>
+<h2>管理者ログイン</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "admin/shared/error_messages", resource: resource %>
@@ -8,5 +8,5 @@
   <%= f.label :password %><br />
   <%= f.password_field :password, autocomplete: "current-password" %><br />
 
-  <%= f.submit "Log in" %>
+  <%= f.submit "ログイン" %>
 <% end %>
