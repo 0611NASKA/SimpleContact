@@ -60,3 +60,4 @@ gem 'kaminari'
 
 gem 'rails-i18n'
 gem 'devise-i18n-views'
+gem 'bootstrap4-kaminari-views'
