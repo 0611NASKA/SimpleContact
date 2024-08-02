@@ -18,6 +18,7 @@ class Admin::InquiriesController < ApplicationController
     if @inquiry.update(inquiry_params)
       redirect_to admin_inquiry_path(@inquiry), notice: "お問い合わせの編集に成功しました"
     else
+      @genres = Genre.all
       render :edit
     end
   end
@@ -32,6 +33,6 @@ class Admin::InquiriesController < ApplicationController
   private
 
   def inquiry_params
-    params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :telephone_number, :body, :is_deleted)
+    params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :email_confirmation, :telephone_number, :body, :is_deleted)
   end
 end

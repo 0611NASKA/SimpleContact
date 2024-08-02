@@ -25,6 +25,10 @@
           <%= f.text_field :email, class: "form-control" %>
         </div>
         <div class="form-group">
+          <%= f.label :email_confirmation, "メールアドレス（確認）" %><span style="color: red;">*</span>
+          <%= f.text_field :email_confirmation, placeholder: "メールアドレスを再入力してください", value: @inquiry.email, class: "form-control" %>
+        </div>
+        <div class="form-group">
           <%= f.label "電話番号" %>
           <%= f.text_field :telephone_number, class: "form-control" %>
         </div>
