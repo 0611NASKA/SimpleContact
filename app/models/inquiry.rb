@@ -1,3 +1,5 @@
 class Inquiry < ApplicationRecord
-  belong_to :genre
+  belongs_to :genre
+
+  validates :name, presence: true
 end

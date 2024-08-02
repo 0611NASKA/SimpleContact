@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/" => "inquires#index"
-    get 'inquiries/:id/destroy' => "inquiries#destroy"
+    get "/" => "inquiries#index"
+    patch 'inquiries/:id/destroy' => "inquiries#destroy", as: "destroy_inquiry"
     resources :inquiries, only: [:show, :edit, :update]
     resources :genres, only: [:index, :edit, :create, :update]
   end

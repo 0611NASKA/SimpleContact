@@ -1,4 +1,9 @@
 class Admin::SessionsController < Devise::SessionsController
+
+  def after_sign_in_path_for(resource)
+    admin_path
+  end
+
   def create
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)
