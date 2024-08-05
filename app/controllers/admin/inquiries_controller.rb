@@ -1,5 +1,5 @@
 class Admin::InquiriesController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :permitted_q_params
   before_action :authenticate_admin!
   def index
     @q = Inquiry.ransack(params[:q])
@@ -44,5 +44,9 @@ class Admin::InquiriesController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
+  def permitted_q_params
+    params.fetch(:q, {}).permit(:company_eq, :name_eq)
   end
 end

@@ -17,11 +17,11 @@
         <table class="table table-striped table-bordered table-hover table-sm">
           <thead>
             <tr>
-              <th><%= sortable "created_at", "お問い合わせ日時" %></th>
-              <th><%= sortable "company", "会社名" %></th>
-              <th><%= sortable "name", "お名前" %></th>
-              <th><%= sortable "email", "メールアドレス" %></th>
-              <th><%= sortable "is_deleted", "削除状況" %></th>
+              <th><%= sortable "created_at", "お問い合わせ日時", permitted_q_params %></th>
+              <th><%= sortable "company", "会社名", permitted_q_params %></th>
+              <th><%= sortable "name", "お名前", permitted_q_params %></th>
+              <th><%= sortable "email", "メールアドレス", permitted_q_params %></th>
+              <th><%= sortable "is_deleted", "削除状況", permitted_q_params %></th>
               <th></th>
               <th></th>
             </tr>

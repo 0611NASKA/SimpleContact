@@ -1,9 +1,9 @@
 module ApplicationHelper
-  def sortable(column, title = nil)
+  def sortable(column, title = nil, q_params = nil)
     title ||= column.titleize
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
     icon = (column == sort_column) ? (sort_direction == "asc" ? "▲" : "▼") : ""
-    link_to "#{title} #{icon}".html_safe, { sort: column, direction: direction }
+    link_to "#{title} #{icon}".html_safe, { sort: column, direction: direction, q: q_params }.compact
   end
 
   private
