@@ -1,9 +1,10 @@
 class Admin::InquiriesController < ApplicationController
-  helper_method :sort_column, :sort_direction, :permitted_q_params
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_admin!
   def index
-    @q = Inquiry.ransack(params[:q])
-    @inquiries = @q.result(distinct: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    search_params = build_search_params
+    @q = Inquiry.ransack(search_params)
+    @inquiries = @q.result(distinct: true).order("#{sort_column} #{sort_direction}").page(params[:page]).per(10)
   end
 
   def edit
@@ -34,10 +35,6 @@ class Admin::InquiriesController < ApplicationController
 
   private
 
-  def inquiry_params
-    params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :email_confirmation, :telephone_number, :body, :is_deleted)
-  end
-
   def sort_column
     Inquiry.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
@@ -46,7 +43,14 @@ class Admin::InquiriesController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
-  def permitted_q_params
-    params.fetch(:q, {}).permit(:company_eq, :name_eq)
+  def build_search_params
+    search_params = {}
+    if params[:company_search_type].present? && params[:company_value].present?
+      search_params["company_#{params[:company_search_type]}"] = params[:company_value]
+    end
+    if params[:name_search_type].present? && params[:name_value].present?
+      search_params["name_#{params[:name_search_type]}"] = params[:name_value]
+    end
+    search_params
   end
 end
