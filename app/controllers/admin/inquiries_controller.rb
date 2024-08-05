@@ -1,7 +1,9 @@
 class Admin::InquiriesController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_admin!
   def index
-    @inquiries = Inquiry.all.page(params[:page]).per(10)
+    @q = Inquiry.ransack(params[:q])
+    @inquiries = @q.result(distinct: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
   end
 
   def edit
@@ -34,5 +36,13 @@ class Admin::InquiriesController < ApplicationController
 
   def inquiry_params
     params.require(:inquiry).permit(:genre_id, :company, :name, :name_kana, :email, :email_confirmation, :telephone_number, :body, :is_deleted)
+  end
+
+  def sort_column
+    Inquiry.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 end

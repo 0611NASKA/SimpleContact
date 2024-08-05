@@ -9,6 +9,10 @@ class Inquiry < ApplicationRecord
   validate :email_format, if: -> { errors[:email].blank? }
   validate :email_match, if: -> { errors[:email_confirmation].blank? }
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["body", "company", "created_at", "email", "genre_id", "id", "is_deleted", "name", "name_kana", "telephone_number", "updated_at"]
+  end
+  
   private
 
   def email_format

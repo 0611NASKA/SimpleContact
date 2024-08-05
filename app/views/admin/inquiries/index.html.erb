@@ -2,15 +2,26 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-12 px-5 px-sm-0 mx-auto">
       <h2 class="border-bottom">お問い合わせ一覧</h2>
+      <%= search_form_for @q, url: admin_path, method: :get, class: "form-inline mb-3" do |f| %>
+        <div class="form-group mr-3">
+          <%= f.label :company_eq, "会社名", class: "mr-2" %>
+          <%= f.text_field :company_eq, class: "form-control" %>
+        </div>
+        <div class="form-group mr-3">
+          <%= f.label :name_eq, "名前", class: "mr-2" %>
+          <%= f.text_field :name_eq, class: "form-control" %>
+        </div>
+        <%= f.submit '検索', class: "btn btn-primary" %>
+      <% end %>
       <% if @inquiries.present? %>
         <table class="table table-striped table-bordered table-hover table-sm">
           <thead>
             <tr>
-              <th>お問い合わせ日時</th>
-              <th>会社名</th>
-              <th>名前</th>
-              <th>メールアドレス</th>
-              <th>削除状況</th>
+              <th><%= sortable "created_at", "お問い合わせ日時" %></th>
+              <th><%= sortable "company", "会社名" %></th>
+              <th><%= sortable "name", "お名前" %></th>
+              <th><%= sortable "email", "メールアドレス" %></th>
+              <th><%= sortable "is_deleted", "削除状況" %></th>
               <th></th>
               <th></th>
             </tr>
@@ -27,7 +38,7 @@
                 <td><%= inquiry.name %></td>
                 <td><%= inquiry.email %></td>
                 <td>
-                  <% if inquiry.is_deleted == true %>
+                  <% if inquiry.is_deleted %>
                     削除済み
                   <% else %>
                     削除していない
